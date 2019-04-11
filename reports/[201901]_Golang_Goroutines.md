@@ -47,7 +47,7 @@ Những ưu điểm của Goroutines so với Thread:
 
 Kết quả:
 </p>
-<p align="center"><img src="../assets/201901/1.png"/></p>
+<p align="center"><img src="../assets/201901_Golang_Goroutines/1.png"/></p>
 <p align="justify">
 Chương trình chỉ in ra <i>main go</i>. Điều gì đã xảy ra khi goroutine được start? Chúng ta cần hiểu được hai tính chất chính sau của goroutine để biết được chính xác điều gì đã xảy ra:
 </p>
@@ -82,7 +82,7 @@ Vậy làm thể nào để in ra kết quả mong muốn? Chúng ta sẽ fix l�
 <sub>*[Run program in playground](https://play.golang.org/p/U9ZZuSql8-)*</sub>
 
 Kết quả:
-<p align="center"><img src="../assets/201901/2.png"/></p>
+<p align="center"><img src="../assets/201901_Golang_Goroutines/2.png"/></p>
 <p align="justify">
 Sử dụng <i>Sleep</i> function của <i>time</i> package để slepp <i>main</i> goroutine đi 1s, dó đó <i>helloGo</i> goroutine có đủ thời gian để thực thi trước khi <i>main</i> goroutine kết thúc và ta có kết quả mong muốn.
 
@@ -130,12 +130,12 @@ Tương tự, <i>alphabets</i> Goroutine in ra các chữ cái từ <i>a</i> đ�
 <i>Main</i> Goroutine start <i>numbers</i> và <i>alphabets</i> Goroutine, được sleep trong 3000 ms và sau đó dừng lại.
 </p>
 Kết quả:
-<p align="center"><img src="../assets/201901/3.png"/></p>
+<p align="center"><img src="../assets/201901_Golang_Goroutines/3.png"/></p>
 
 <p align="justify">
 Ảnh bên dưới mô tả chương trình trên làm việc như thế nào:
 </p>
-<p align="center"><img src="../assets/201901/4.png"/></p>
+<p align="center"><img src="../assets/201901_Golang_Goroutines/4.png"/></p>
 <p align="justify">
 Tại phần đầu tiên có màu xanh lam đại diện cho <i>numbers Goroutine</i> , phần thứ hai có màu đỏ đại diện cho <i>alphabets Goroutine</i> , phần thứ ba màu xanh lá cây đại diện cho <i>main Goroutine</i> và phần cuối cùng màu đen hợp nhất tất cả ba phần trên chương trình hoạt động.
 

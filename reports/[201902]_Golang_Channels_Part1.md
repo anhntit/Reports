@@ -32,7 +32,7 @@ Khai báo channel:
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/QDtf6mvymD)*</sub>
 <p align="justify">Channel <i>c</i> được khai báo tại dòng 6 là <i>nil</i> vì zero value của channel là <i>nil</i>. Khi đó điều kiện if thỏa mãn và channel được khởi tạo. <i>c</i> trong chương trình trên là một <i>int</i> channel. Chương trình này sẽ cho kết quả: </p>
-<p align="center"><img src="../assets/201902/1.png"/></p>
+<p align="center"><img src="../assets/201902_Golang_Channels_Part1/1.png"/></p>
 <p align="justify">Chúng ta cũng có thể sử dụng cách khai báo ngắn ngon như thông thường để khai báo một channel. </p>
 
 ```golang
@@ -112,7 +112,7 @@ Bây giờ chúng ta thấy rằng <i>main</i> Goroutine đã bị block và ch�
 
 Kết quả:
 </p>
-<p align="center"><img src="../assets/201902/2.png"/></p>
+<p align="center"><img src="../assets/201902_Golang_Channels_Part1/2.png"/></p>
 <p align="justify">Hãy thay đổi chương trình này bằng việc thêm sleep trong <i>hello</i> Goroutine để hiểu hơn về khái niệm <i>blocking</i>.</p>
 
 ```golang
@@ -149,7 +149,7 @@ Sau 4s <i>hello go routine awake and going to write to done</i> sẽ được pr
 
 Kết quả:
 </p>
-<p align="center"><img src="../assets/201902/3.png"/></p>
+<p align="center"><img src="../assets/201902_Golang_Channels_Part1/3.png"/></p>
 
 ## 6. Another example for channels
 <p align="justify">
@@ -219,7 +219,7 @@ Hai function này sẽ được chạy trong hai Goroutine riêng biệt (line 3
 
 Kết quả:
 </p>
-<p align="center"><img src="../assets/201902/4.png"/></p>
+<p align="center"><img src="../assets/201902_Golang_Channels_Part1/4.png"/></p>
 <br/>
 <br/>
 <p align="justify">

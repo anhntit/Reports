@@ -22,7 +22,7 @@ console.warn("Hello Warn");
 console.error("Hello Error");
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/1.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/1.png"/></p>
 <p align="justify">
 Nhờ vậy chúng ta có thể lọc message theo category như cột bên trái của <i>Tab Console</i> trong <i>Developer Tools</i> của browser.
 
@@ -41,7 +41,7 @@ Ngoài việc in giá trị, message ra màn hình thì các function <i>warn</i
 7   trace();
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/2.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/2.png"/></p>
 
 ## 2. Console Assert
 <p align="justify">
@@ -61,7 +61,7 @@ Giả sử chúng ta đang muốn thực hiện validate một giá trị, nếu
 8   validate(false);
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/3.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/3.png"/></p>
 <p align="justify">
 Tuy nhiên, chúng ta có một function tốt hơn rất nhiều để có thể in ra message, đồng thời nó cũng show ra stack trace. Đó chính là function <i>assert</i>:
 </p>
@@ -75,7 +75,7 @@ Tuy nhiên, chúng ta có một function tốt hơn rất nhiều để có th�
 6   assert(false);
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/4.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/4.png"/></p>
 
 ## 3. Console Count
 <p align="justify">
@@ -115,9 +115,9 @@ Chúng ta có thể sử dụng <i>console.time</i> và <i>console.timeEnd</i> �
 10  getData();
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/5.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/5.png"/></p>
 <p>Chú ý nếu tên của timer ở 2 function không giống nhau thì ta sẽ nhận được một warning message:</p>
-<p align="center"><img src="../assets/201812/6.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/6.png"/></p>
 
 ##  5. Console Group
 <p align="justify">
@@ -142,7 +142,7 @@ Chúng ta sử dụng <i>console.group</i> và <i>console.groupEnd</i> để nh�
 15  group();
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/7.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/7.png"/></p>
 
 ## 6. Console Table
 Function <i>console.table</i> giúp ta có thể hiển thị array hoặc object dưới dạng table:
@@ -169,7 +169,7 @@ Function <i>console.table</i> giúp ta có thể hiển thị array hoặc objec
 19  logObjectAsTable();
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/8.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/8.png"/></p>
 
 ## 7. Console Style Sheet
 Khi in value ra console, chúng ta cũng có thể sử dụng style sheet cho các value bằng cách sử dụng format <i>%c</i> . Tất cả những value đứng đằng sau %c sẽ được áp dụng style sheet đó.
@@ -186,7 +186,7 @@ Khi in value ra console, chúng ta cũng có thể sử dụng style sheet cho c
 9   styleSheet();
 ```
 Kết quả:
-<p align="center"><img src="../assets/201812/9.png"/></p>
+<p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/9.png"/></p>
 <br/>
 <br/>
 Trên đây là một số function của <i>Console</i> trong Javascript, khá thú vị phải không nào.

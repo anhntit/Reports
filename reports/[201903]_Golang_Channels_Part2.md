@@ -27,7 +27,7 @@ Tương tự, nếu một Goroutine đang chờ nhận data từ channel, thì m
 Trong chương trình trên, tôi đã tạo ra channel <i>ch</i> và gửi 5 tới channel này (line 5). Trong chương trình này không có Goroutine nào đang nhận data từ channel <i>ch</i>. Do đó chương trình sẽ bị panic với runtime error bên dưới.
 </p>
 <br/>
-<p align="center"><img src="../assets/201903/1.png"/></p>
+<p align="center"><img src="../assets/201903_Golang_Channels_Part2/1.png"/></p>
 
 ## 2. Unidirectional channels
 <p align="justify">
@@ -54,7 +54,7 @@ Tất cả những channel chúng ta đã thảo luận và các ví dụ đều
 <p align="justify">
 Trong chương trình trên, tôi đã tạo ra channel chỉ gửi data <i>sendch</i> (line 10). Tại line 12, tôi đang nhận data từ một channel chỉ gửi data. Điều này không được phép và khi chương trình run, trình biên dịch sẽ thông báo:
 </p>
-<p align="center"><img src="../assets/201903/2.png"/></p>
+<p align="center"><img src="../assets/201903_Golang_Channels_Part2/2.png"/></p>
 
 <p align="justify">
 Chúng ta có thể convert một channel 2 chiều thành channel chỉ gửi hoặc nhận data nhưng không thể convert ngược lại.
@@ -125,7 +125,7 @@ Trong statement trên <i>ok</i> là true nếu giá trị được nhận bới 
 <p align="justify">
 Trong chương trình trên, producer Goroutine sẽ ghi từ 0 tới 9 tới <i>chnl</i> channel và sau đó close channel. Main function có một vòng lặp for vô hạn (line 16) sẽ kiểm tra channel đã close hay chưa thông qua <i>ok</i> variable (line 18). Nếu <i>ok</i> là false có nghĩa rằng channel đã bị close và sẽ thoát khỏi vòng lặp. Nếu như channel chưa bị close thì giá trị trong channel và giá trị của ok sẽ được print.
 </p>
-<p align="center"><img src="../assets/201903/3.png"/></p>
+<p align="center"><img src="../assets/201903_Golang_Channels_Part2/3.png"/></p>
 <p align="justify">
 Chúng ta có thể sử dụng <i>for range</i> cho vòng lặp for để nhận value từ một channel cho đến khi nó bị close. Hãy viết lại chương trình trên với vòng lặp for range
 </p>
