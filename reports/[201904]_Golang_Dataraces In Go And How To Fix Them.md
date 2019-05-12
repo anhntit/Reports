@@ -39,11 +39,13 @@ Tùy thuộc vào trường hợp nào xảy ra trước sẽ quyết định gi
 Đây là lý do tại sao nó được gọi là *race condition*: giá trị trả về từ <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> thay đổi tùy thuộc vào operation nào kết thúc trước
 </p>
 
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/1.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/1.png"/>
+<br/>
 <i>Data race với operation đọc giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> hoàn thành trước.</i>
 </p>
 
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/2.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/2.png"/>
+<br/>
 <i>Data race với operation ghi giá trị vào <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> hoàn thành trước.</i>
 </p>
 
@@ -130,7 +132,7 @@ func getNumber() int {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/RHbGQOI3cUv)*</sub>
 
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/3.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/3.png"/>
 </p>
 
 Về <span style="background:gray;padding:2px 5px;border-radius:4px">WaitGroups</span> trong Go, tôi sẽ có một bài viết chi tiết sau.
@@ -166,7 +168,7 @@ func getNumber() int {
 	return i
 }
 ```
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/4.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/4.png"/>
 </p>
 
 <p align="justify">
@@ -204,7 +206,7 @@ func getNumberChan() <-chan int {
 }
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/POYn3UalH3e)*</sub>
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/5.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/5.png"/>
 </p>
 <p align="justify">
 Cách tiếp cận này linh hoạt hơn ở chỗ, nó cho phép các function ở level cao hơn quyết định cơ chế blocking và concurrency của riêng chúng thay vì coi <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> là synchronous.
@@ -264,11 +266,13 @@ func getNumber() int {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/SgmxIMSOtyH)*</sub>
 
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/6.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/6.png"/>
+<br/>
 <i>Mutex với write locking.</i>
 </p>
 
-<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/7.svg"/>
+<p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/7.png"/>
+<br/>
 <i>Mutex với read locking.</i>
 </p>
 
