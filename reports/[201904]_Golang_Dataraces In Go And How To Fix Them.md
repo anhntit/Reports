@@ -28,32 +28,33 @@ func getNumber() int {
 <sub>*[Run program in playground](https://play.golang.org/p/TvaREY1QDFx)*</sub>
 
 <p align="justify">
-Ở đây chúng ta có thể thấy rằng function <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> đang thiết lập giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> trong một goroutine riêng biệt. getNumber sẽ return giá trị của i, tuy nhiên chúng ta không biết rằng goroutine trên đã hoàn thành hay chưa.
+
+Ở đây chúng ta có thể thấy rằng function `getNumber` đang thiết lập giá trị của `i` trong một goroutine riêng biệt. getNumber sẽ return giá trị của i, tuy nhiên chúng ta không biết rằng goroutine trên đã hoàn thành hay chưa.
 
 Sẽ có hai trường hợp xảy ra:
-1. Giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> sẽ là <span style="background:gray;padding:2px 5px;border-radius:4px">5</span>
-2. Giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> đang được thiết lập và trả về do goroutine chưa hoàn thành
+1. Giá trị của `i` sẽ là `5`
+2. Giá trị của `i` đang được thiết lập và trả về do goroutine chưa hoàn thành
 
-Tùy thuộc vào trường hợp nào xảy ra trước sẽ quyết định giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> được in ra sẽ là <span style="background:gray;padding:2px 5px;border-radius:4px">0</span> hay <span style="background:gray;padding:2px 5px;border-radius:4px">5</span>
+Tùy thuộc vào trường hợp nào xảy ra trước sẽ quyết định giá trị của `i` được in ra sẽ là `0` hay `5`
 
-Đây là lý do tại sao nó được gọi là *race condition*: giá trị trả về từ <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> thay đổi tùy thuộc vào operation nào kết thúc trước
+Đây là lý do tại sao nó được gọi là *race condition*: giá trị trả về từ `getNumber` thay đổi tùy thuộc vào operation nào kết thúc trước
 </p>
 
 <p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/1.png"/>
 <br/>
-<i>Data race với operation đọc giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> hoàn thành trước.</i>
+<i>Data race với operation đọc giá trị của `i` hoàn thành trước.</i>
 </p>
 
 <p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/2.png"/>
 <br/>
-<i>Data race với operation ghi giá trị vào <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> hoàn thành trước.</i>
+<i>Data race với operation ghi giá trị vào `i` hoàn thành trước.</i>
 </p>
 
 ## Detecting a data race
 <p align="justify">
 Ở trên là một ví dụ rất đơn giản để hiểu được data race là gì. Trong các ứng dụng lớn hơn data race sẽ khó phát hiện hơn nhiều. May mắn rằng, Go (kể từ v1.1) có một data race detector giúp chúng ta phát hiện những điểm có nguy cơ gây ra data race condition.
 
-Chỉ đơn giản bằng cách sử dụng <span style="background:gray;padding:2px 5px;border-radius:4px">-race</span> flag. Ví dụ hãy thử run program trên với <span style="background:gray;padding:2px 5px;border-radius:4px">-race</span> flag
+Chỉ đơn giản bằng cách sử dụng `-race` flag. Ví dụ hãy thử run program trên với `-race` flag
 ```
 go run -race main.go
 ```
@@ -81,14 +82,14 @@ Goroutine 6 (running) created at:
 Found 1 data race(s)
 exit status 66
 ```
-Đầu tiên là <span style="background:gray;padding:2px 5px;border-radius:4px">0</span> sẽ được in. Các line tiếp theo sẽ cho chúng ta biết thông tin về data race được phát hiện.
+Đầu tiên là `0` sẽ được in. Các line tiếp theo sẽ cho chúng ta biết thông tin về data race được phát hiện.
 
 Chúng ta có thể  thấy rằng thông tin nhận được về data race gồm có 3 phần:
-1. Phần đầu tiên cho chúng ta biết có một operation write trong một goroutine (line 12 - gán giá trị <span style="background:gray;padding:2px 5px;border-radius:4px">5</span> cho <span style="background:gray;padding:2px 5px;border-radius:4px">i</span>)
+1. Phần đầu tiên cho chúng ta biết có một operation write trong một goroutine (line 12 - gán giá trị `5` cho `i`)
 2. Phần tiếp theo cho chúng ta biết có một operation read đồng thời bởi main goroutine, trong code được trace tại line 6 - print statement và line 15 - retrun statement
 3. Phần thứ 3 cho biết nơi tạo ra goroutine gây ra race condition (line 11)
 
-Ta có thể thấy rằng, chỉ cần thêm <span style="background:gray;padding:2px 5px;border-radius:4px">-race</span> flag, câu lệnh <span style="background:gray;padding:2px 5px;border-radius:4px">go run</span> đã cho chúng ta biết thông tin về race condition trong program. <span style="background:gray;padding:2px 5px;border-radius:4px">-race</span> flag cũng có thể thêm vào <span style="background:gray;padding:2px 5px;border-radius:4px">go build</span> hoặc <span style="background:gray;padding:2px 5px;border-radius:4px">go test</span>
+Ta có thể thấy rằng, chỉ cần thêm `-race` flag, câu lệnh `go run` đã cho chúng ta biết thông tin về race condition trong program. `-race` flag cũng có thể thêm vào `go build` hoặc `go test`
 </p>
 
 ## Fixing data races
@@ -135,7 +136,7 @@ func getNumber() int {
 <p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/3.png"/>
 </p>
 
-Về <span style="background:gray;padding:2px 5px;border-radius:4px">WaitGroups</span> trong Go, tôi sẽ có một bài viết chi tiết sau.
+Về `WaitGroups` trong Go, tôi sẽ có một bài viết chi tiết sau.
 
 ### Blocking with channels
 <p align="justify">
@@ -172,7 +173,8 @@ func getNumber() int {
 </p>
 
 <p align="justify">
-Blocking bên trong <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> function khá đơn giản. Phương pháp tiếp theo có cách tiếp cận linh hoạt hơn đối với việc thực hiện blocking.
+
+Blocking bên trong `getNumber` function khá đơn giản. Phương pháp tiếp theo có cách tiếp cận linh hoạt hơn đối với việc thực hiện blocking.
 </p>
 
 ### Returning a channel 
@@ -209,12 +211,14 @@ func getNumberChan() <-chan int {
 <p align="center"><img src="../assets/201904_Golang_Dataraces_In_Go_And_How_To_Fix_Them/5.png"/>
 </p>
 <p align="justify">
-Cách tiếp cận này linh hoạt hơn ở chỗ, nó cho phép các function ở level cao hơn quyết định cơ chế blocking và concurrency của riêng chúng thay vì coi <span style="background:gray;padding:2px 5px;border-radius:4px">getNumber</span> là synchronous.
+
+Cách tiếp cận này linh hoạt hơn ở chỗ, nó cho phép các function ở level cao hơn quyết định cơ chế blocking và concurrency của riêng chúng thay vì coi `getNumber` là synchronous.
 </p>
 
 ### Using a mutex
 <p align="justify">
-Cho đến hiện tại, chúng ta quyết định rằng giá trị của <span style="background:gray;padding:2px 5px;border-radius:4px">i</span> chỉ nên được đọc sau khi thao tác ghi đã kết thúc. Tuy nhiên, hãy nghĩ về trường hợp mà chúng ta không quan tới thứ tự của việc đọc ghi, chúng ta chỉ yêu cầu hai thao tác này không xảy ra đồng thời. Để đạt được điều này chúng ta có thể sử dụng <span style="background:gray;padding:2px 5px;border-radius:4px">mutex</span>
+
+Cho đến hiện tại, chúng ta quyết định rằng giá trị của `i` chỉ nên được đọc sau khi thao tác ghi đã kết thúc. Tuy nhiên, hãy nghĩ về trường hợp mà chúng ta không quan tới thứ tự của việc đọc ghi, chúng ta chỉ yêu cầu hai thao tác này không xảy ra đồng thời. Để đạt được điều này chúng ta có thể sử dụng `mutex`
 </p>
 
 ```golang

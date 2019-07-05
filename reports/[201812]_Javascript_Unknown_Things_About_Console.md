@@ -1,16 +1,18 @@
 # [Javascript] Unknown Things About Console
 
 <p align="justify">
-Xin chào mọi người, tiếp tục với Javascript thì hôm này mình sẽ chia sẻ một chút hiểu biết về <i>Console</i>.
 
-Nhắc tới <i>Console</i> hẳn ai cũng rất quen thuộc và đặc biệt là function <i>console.log</i> của Console - in giá trị ra màn hình rất hay được sử dụng để debug ngay cả khi chúng ta đã có <i>Developer Tools</i> của browser.
+Xin chào mọi người, tiếp tục với Javascript thì hôm này mình sẽ chia sẻ một chút hiểu biết về `Console`.
 
-Vậy liệu rằng <i>Console</i> chỉ có function console.log hay nó còn có những function hay ho khác mà ta chưa biết. 
+Nhắc tới `Console` hẳn ai cũng rất quen thuộc và đặc biệt là function `console.log` của Console - in giá trị ra màn hình rất hay được sử dụng để debug ngay cả khi chúng ta đã có `Developer Tools` của browser.
+
+Vậy liệu rằng `Console` chỉ có function console.log hay nó còn có những function hay ho khác mà ta chưa biết. 
 </p>
 
 ## 1. Console Logging
 <p align="justify">
-Ngoài <i>console.log</i> được dùng để in giá trị ra màn hình thì <i>Console</i> còn có <i>info</i>, <i>warn</i> và <i>error</i>.
+
+Ngoài `console.log` được dùng để in giá trị ra màn hình thì `Console` còn có `info`, `warn` và `error`.
 
 Những function này được sử dụng để in thông in ra màn hình theo severity.
 </p>
@@ -24,11 +26,12 @@ console.error("Hello Error");
 Kết quả:
 <p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/1.png"/></p>
 <p align="justify">
-Nhờ vậy chúng ta có thể lọc message theo category như cột bên trái của <i>Tab Console</i> trong <i>Developer Tools</i> của browser.
 
-Ngoài việc in giá trị, message ra màn hình thì các function <i>warn</i> và <i>error</i> cũng show stack trace giúp chúng ta có thể biết được lỗi đang nằm ở đâu.
+Nhờ vậy chúng ta có thể lọc message theo category như cột bên trái của `Tab Console` trong `Developer Tools` của browser.
 
-Để in ra stack trace thì chúng ta cũng có thể sử dụng function <i>trace</i>:
+Ngoài việc in giá trị, message ra màn hình thì các function `warn` và `error` cũng show stack trace giúp chúng ta có thể biết được lỗi đang nằm ở đâu.
+
+Để in ra stack trace thì chúng ta cũng có thể sử dụng function `trace`:
 </p>
 
 ```javascript
@@ -47,7 +50,7 @@ Kết quả:
 <p align="justify">
 Giả sử chúng ta đang muốn thực hiện validate một giá trị, nếu giá trị không hợp lệ thì chúng ta sẽ in một message thông báo ra console.
 
-Để đơn giản mình sẽ lấy <i>value = true, false</i>:
+Để đơn giản mình sẽ lấy `value = true, false`:
 </p>
 
 ```javascript
@@ -63,7 +66,8 @@ Giả sử chúng ta đang muốn thực hiện validate một giá trị, nếu
 Kết quả:
 <p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/3.png"/></p>
 <p align="justify">
-Tuy nhiên, chúng ta có một function tốt hơn rất nhiều để có thể in ra message, đồng thời nó cũng show ra stack trace. Đó chính là function <i>assert</i>:
+
+Tuy nhiên, chúng ta có một function tốt hơn rất nhiều để có thể in ra message, đồng thời nó cũng show ra stack trace. Đó chính là function `assert`:
 </p>
 
 ```javascript
@@ -79,7 +83,8 @@ Kết quả:
 
 ## 3. Console Count
 <p align="justify">
-Function <i>count</i> được sử dụng để đếm số lần là function này được gọi, function này có một optional parameter.
+
+Function `count` được sử dụng để đếm số lần là function này được gọi, function này có một optional parameter.
 </p>
 
 ```javascript
@@ -99,7 +104,8 @@ Function <i>count</i> được sử dụng để đếm số lần là function 
 
 ## 4. Console Time
 <p align="justify">
-Chúng ta có thể sử dụng <i>console.time</i> và <i>console.timeEnd</i> để tính tổng thời gian thực hiện tất cả những thứ nằm giữa 2 function này. Chúng ta có thể truyền vào một parameter là tên của timer.
+
+Chúng ta có thể sử dụng `console.time` và `console.timeEnd` để tính tổng thời gian thực hiện tất cả những thứ nằm giữa 2 function này. Chúng ta có thể truyền vào một parameter là tên của timer.
 </p>
 
 ```javascript
@@ -121,7 +127,8 @@ Kết quả:
 
 ##  5. Console Group
 <p align="justify">
-Chúng ta sử dụng <i>console.group</i> và <i>console.groupEnd</i> để nhóm các giá trị được log trong console thành những group khác nhau. Chúng ta có thể đặt tên cho các group:
+
+Chúng ta sử dụng `console.group` và `console.groupEnd` để nhóm các giá trị được log trong console thành những group khác nhau. Chúng ta có thể đặt tên cho các group:
 </p>
 
 ```javascript
@@ -145,7 +152,7 @@ Kết quả:
 <p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/7.png"/></p>
 
 ## 6. Console Table
-Function <i>console.table</i> giúp ta có thể hiển thị array hoặc object dưới dạng table:
+Function `console.table` giúp ta có thể hiển thị array hoặc object dưới dạng table:
 
 ```javascript
 1   function logTable(object) {
@@ -172,7 +179,7 @@ Kết quả:
 <p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/8.png"/></p>
 
 ## 7. Console Style Sheet
-Khi in value ra console, chúng ta cũng có thể sử dụng style sheet cho các value bằng cách sử dụng format <i>%c</i> . Tất cả những value đứng đằng sau %c sẽ được áp dụng style sheet đó.
+Khi in value ra console, chúng ta cũng có thể sử dụng style sheet cho các value bằng cách sử dụng format `%c` . Tất cả những value đứng đằng sau %c sẽ được áp dụng style sheet đó.
 
 ```javascript
 1   function styleSheet() {
@@ -189,6 +196,7 @@ Kết quả:
 <p align="center"><img src="../assets/201812_Javascript_Unknown_Things_About_Console/9.png"/></p>
 <br/>
 <br/>
-Trên đây là một số function của <i>Console</i> trong Javascript, khá thú vị phải không nào.
+
+Trên đây là một số function của `Console` trong Javascript, khá thú vị phải không nào.
 
 Hẹn gặp lại các bạn trong những bài chia sẻ tiếp theo.

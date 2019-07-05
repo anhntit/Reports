@@ -11,7 +11,9 @@
 ```golang
 chan T //is a channel of type T
 ```
-<p align="justify">Zero value của channel là <i>nil</i>. <i>nil channels</i> sẽ không sử dụng được mà chúng ta phải define nó tương tự như <i>maps</i> và <i>slices</i> bằng cách sử dụng <i>make</i>.
+<p align="justify">
+
+Zero value của channel là `nil`. `nil` channels sẽ không sử dụng được mà chúng ta phải define nó tương tự như `maps` và `slices` bằng cách sử dụng `make`.
 
 Khai báo channel:
 <p>
@@ -31,7 +33,9 @@ Khai báo channel:
 12  }
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/QDtf6mvymD)*</sub>
-<p align="justify">Channel <i>c</i> được khai báo tại dòng 6 là <i>nil</i> vì zero value của channel là <i>nil</i>. Khi đó điều kiện if thỏa mãn và channel được khởi tạo. <i>c</i> trong chương trình trên là một <i>int</i> channel. Chương trình này sẽ cho kết quả: </p>
+<p align="justify">
+
+Channel `c` được khai báo tại dòng 6 là `nil` vì zero value của channel là `nil`. Khi đó điều kiện if thỏa mãn và channel được khởi tạo. `c` trong chương trình trên là một `int` channel. Chương trình này sẽ cho kết quả: </p>
 <p align="center"><img src="../assets/201902_Golang_Channels_Part1/1.png"/></p>
 <p align="justify">Chúng ta cũng có thể sử dụng cách khai báo ngắn ngon như thông thường để khai báo một channel. </p>
 
@@ -46,14 +50,17 @@ c := make(chan int)
 data := <- c // read from channel c  
 c <- data // write to channel c 
 ```
-<p align="justify">Hướng mũi tên sẽ xác định data được gửi hay nhận từ channel.
+<p align="justify">
+
+Hướng mũi tên sẽ xác định data được gửi hay nhận từ channel.
 <br/>
-Ở dòng 1, hướng mũi tên đi ra từ <i>c</i> do đó chúng ta đang nhận dữ liệu từ channel <i>c</i> và assign vào biến <i>data</i>.
+Ở dòng 1, hướng mũi tên đi ra từ `c` do đó chúng ta đang nhận dữ liệu từ channel `c` và assign vào biến `data`.
 <br/>
-Ở dòng 2, hướng mũi tên đi vào <i>c</i> và chúng ta đang gửi <i>data</i> tới channel <i>c</i>.</p>
+Ở dòng 2, hướng mũi tên đi vào `c` và chúng ta đang gửi `data` tới channel `c`.</p>
 
 ## 4. Sends and receives are blocking by default
 <p align="justify">
+
 Mặc định việc gửi và nhận từ channel sẽ bị block. Điều này có nghĩa là gì? Khi dữ liệu được gửi tới một channel thì việc gửi sẽ bị block cho đến khi có một Goroutine khác đọc dữ liệu từ channel đó. Tương tự như khi đọc dữ liệu từ một channel, việc đọc sẽ bị block cho đến khi có một Goroutine khác ghi dữ liệu tới channel.
 
 Tính chất này của channel giúp các Goroutine có thể giao tiếp với nhau một cách hiệu quả và dễ dàng mà không cần phải sử dụng từ khóa lock hoặc condition variable, những thứ khá phổ biến trong ngôn ngữ khác.
@@ -80,7 +87,9 @@ Hãy cùng xem một số ví dụ để hiểu về channel
 15  }
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/U9ZZuSql8-)*</sub>
-<p align="justify">Ở đây chúng ta sử dụng sleep để  <i>main</i> goroutine đợi <i>hello</i> goroutine có thể hoàn thành việc execute.
+<p align="justify">
+
+Ở đây chúng ta sử dụng sleep để  `main` goroutine đợi `hello` goroutine có thể hoàn thành việc execute.
 <br/>
 Chúng ta sẽ viết lại chương trình trên bằng cách sử dụng channel:</p>
 
@@ -104,16 +113,19 @@ Chúng ta sẽ viết lại chương trình trên bằng cách sử dụng chann
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/I8goKv6ZMF)*</sub>
 <p align="justify">
-Ở chương trình trên chúng ta tạo một <i>bool channel</i> có tên <i>done</i> (line 12) và truyền nó vào <i>hello</i> Goroutine. Chúng ta nhận dữ liệu từ <i>done</i> channel (line 14), và dòng code này đang block cho đến khi có một Goroutine khác ghi dữ liệu tới <i>done</i> channel, dòng code tiếp theo sẽ chưa được thực thi. Ở đây chúng ta đã loại bỏ được việc dùng time.Sleep để ngăn <i>main</i> Goroutine exit.
 
-Dòng code <i><- done</i>(lien 14) nhận dữ liệu từ <i>done</i> channel nhưng không sử dụng hay lưu trữ dữ liệu vào bất kỳ biến nào cả. Điều này hoàn toàn được cho phép và hợp lệ.
+Ở chương trình trên chúng ta tạo một `bool channel` có tên `done` (line 12) và truyền nó vào `hello` Goroutine. Chúng ta nhận dữ liệu từ `done` channel (line 14), và dòng code này đang block cho đến khi có một Goroutine khác ghi dữ liệu tới `done` channel, dòng code tiếp theo sẽ chưa được thực thi. Ở đây chúng ta đã loại bỏ được việc dùng time.Sleep để ngăn `main` Goroutine exit.
 
-Bây giờ chúng ta thấy rằng <i>main</i> Goroutine đã bị block và chờ dữ liệu từ <i>done</i> channel. <i>hello</i> Goroutine nhận param là <i>done</i> channel, print <i>Hello world goroutine</i> ra console và sau đó ghi dữ liệu vào <i>done</i> channle. Khi việc ghi dữ liệu được hoàn thành, <i>main</i> Goroutine sẽ nhận dữ liệu  từ <i>done</i> channle, nó sẽ được unblock và sau đó đoạn text <i>main function</i> được print.
+Dòng code `<- done`(lien 14) nhận dữ liệu từ `done` channel nhưng không sử dụng hay lưu trữ dữ liệu vào bất kỳ biến nào cả. Điều này hoàn toàn được cho phép và hợp lệ.
+
+Bây giờ chúng ta thấy rằng `main` Goroutine đã bị block và chờ dữ liệu từ `done` channel. `hello` Goroutine nhận param là `done` channel, print `Hello world goroutine` ra console và sau đó ghi dữ liệu vào `done` channle. Khi việc ghi dữ liệu được hoàn thành, `main` Goroutine sẽ nhận dữ liệu  từ `done` channle, nó sẽ được unblock và sau đó đoạn text `main function` được print.
 
 Kết quả:
 </p>
 <p align="center"><img src="../assets/201902_Golang_Channels_Part1/2.png"/></p>
-<p align="justify">Hãy thay đổi chương trình này bằng việc thêm sleep trong <i>hello</i> Goroutine để hiểu hơn về khái niệm <i>blocking</i>.</p>
+<p align="justify">
+
+Hãy thay đổi chương trình này bằng việc thêm sleep trong `hello` Goroutine để hiểu hơn về khái niệm `blocking`.</p>
 
 ```golang
 1   package main
@@ -139,13 +151,14 @@ Kết quả:
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/EejiO-yjUQ)*</sub>
 <p align="justify">
-Trong chương trình trên chúng ta sleep 4s trong <i>hello</i> function tại dòng 10.
 
-Chương trình sẽ print <i>Main going to call hello go goroutine</i> đầu tiên. 
+Trong chương trình trên chúng ta sleep 4s trong `hello` function tại dòng 10.
+
+Chương trình sẽ print `Main going to call hello go goroutine` đầu tiên. 
 <br/>
-Sau đó <i>hello</i> Goroutine sẽ được start và nó sẽ print <i>hello go routine is going to sleep</i>. Sau khi text này được print, <i>hello</i> Goroutine sẽ sleep trong 4s và trong khoảng thời gian này <i>main</i> Goroutine sẽ bị block vì nó đang chờ dữ liệu từ <i>done</i> channel (line 18). 
+Sau đó `hello` Goroutine sẽ được start và nó sẽ print `hello go routine is going to sleep`. Sau khi text này được print, `hello` Goroutine sẽ sleep trong 4s và trong khoảng thời gian này `main` Goroutine sẽ bị block vì nó đang chờ dữ liệu từ `done` channel (line 18). 
 <br/>
-Sau 4s <i>hello go routine awake and going to write to done</i> sẽ được print và cuối cùng là <i>Main received data</i>.
+Sau 4s `hello go routine awake and going to write to done` sẽ được print và cuối cùng là `Main received data`.
 
 Kết quả:
 </p>
@@ -169,7 +182,8 @@ Program calculate
 Output: squares + cubes = 50
 ```
 <p align="justify">
-Chúng ta sẽ để việc tính toán <i>squares</i> và <i>cubes</i> tại hai Goroutine riêng biêt và kết quả tổng cuối cùng sẽ được tính trong <i>main</i> Goroutine
+
+Chúng ta sẽ để việc tính toán `squares` và `cubes` tại hai Goroutine riêng biêt và kết quả tổng cuối cùng sẽ được tính trong `main` Goroutine
 </p>
 
 ```golang
@@ -211,11 +225,12 @@ Chúng ta sẽ để việc tính toán <i>squares</i> và <i>cubes</i> tại ha
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/4RKr7_YO_B)*</sub>
 <p align="justify">
-<i>calcSquares</i> function (line 7) sẽ tính toán tổng bình phương của các chữ số của <i>number</i> và gửi kết quả tới <i>squareop</i> channel. Tương tự với <i>calcCubes</i> function (lỉe 17) cũng tính toán tổng lập phương của các chữ số của <i>number</i> và gửi kết quả tới <i>cubeop</i> channel.
+
+`calcSquares` function (line 7) sẽ tính toán tổng bình phương của các chữ số của `number` và gửi kết quả tới `squareop` channel. Tương tự với `calcCubes` function (lỉe 17) cũng tính toán tổng lập phương của các chữ số của `number` và gửi kết quả tới `cubeop` channel.
 
 Hai function này sẽ được chạy trong hai Goroutine riêng biệt (line 31 và 32) và mỗi function được truyển param là channel để ghi kết quả vào đó.
 
-<i>main</i> Goroutine sẽ chờ dữ liệu từ cả hai channel này (line 33). Khi dữ liệu được nhận từ các channel này, nó sẽ được lưu vào các biến <i>squares</i> và <i>cubes</i> và kết quả cuối cùng được tính toán và print.
+`main` Goroutine sẽ chờ dữ liệu từ cả hai channel này (line 33). Khi dữ liệu được nhận từ các channel này, nó sẽ được lưu vào các biến `squares` và `cubes` và kết quả cuối cùng được tính toán và print.
 
 Kết quả:
 </p>
@@ -223,7 +238,8 @@ Kết quả:
 <br/>
 <br/>
 <p align="justify">
-Vậy là phần 1 thảo luận về channel đã kết thúc, tại phần 2 mình sẽ chia sẻ với các bạn về  <i>deadlock</i>, <i>unidirectional channels</i>, <i>close channel</i> và sử dụng <i>range</i> để loop một channel.
+
+Vậy là phần 1 thảo luận về channel đã kết thúc, tại phần 2 mình sẽ chia sẻ với các bạn về  `deadlock`, `unidirectional channels`, `close channel` và sử dụng `range` để loop một channel.
 
 Hẹn gặp lại các bạn ở bài viết lần sau.
 </p>

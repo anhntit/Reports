@@ -8,7 +8,8 @@ Trong bài viết lần này, tôi sẽ tiếp tục chia sẻ về Channel.
 
 ## 1. Deadlock
 <p align="justify">
-Một vấn đề quan trọng khi sử dụng Channel là deadlock. nếu một Goroutine đang gửi data trên một channel, thì nó kì vọng rằng sẽ có một Goroutine khác đang thực hiện việc nhận data. Nếu điều này không xảy ra thì chương trình của chúng ta sẽ panic tại runtime cùng với <b><i>Deadlock</b></i>
+
+Một vấn đề quan trọng khi sử dụng Channel là deadlock. nếu một Goroutine đang gửi data trên một channel, thì nó kì vọng rằng sẽ có một Goroutine khác đang thực hiện việc nhận data. Nếu điều này không xảy ra thì chương trình của chúng ta sẽ panic tại runtime cùng với <i>`Deadlock`</i>
 
 Tương tự, nếu một Goroutine đang chờ nhận data từ channel, thì một Goroutine khác phải gửi data tới channel đó, nếu không chương trình sẽ bị panic.
 </p>

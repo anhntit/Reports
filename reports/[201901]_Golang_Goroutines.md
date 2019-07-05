@@ -24,7 +24,9 @@ Những ưu điểm của Goroutines so với Thread:
 *   <p align="justify">Goroutines trao đổi với nhau thông qua Channel. Channel được thiết kế để ngăn ngừa race condition xảy ra khi truy cập share memory bởi Goroutines. </p>
 
 ## 2. How to start a Goroutine?
-<p align="justify">Để start một Gorountine, chúng ta thêm từ khóa <i>go</i> trước function hoặc method.</p>
+<p align="justify">
+
+Để start một Gorountine, chúng ta thêm từ khóa `go` trước function hoặc method.</p>
 
 ```golang
 1   package main
@@ -43,13 +45,16 @@ Những ưu điểm của Goroutines so với Thread:
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/zC78_fc1Hn)*</sub>
 
-<p align="justify"><i>go helloGo()</i> start một Goroutine mới. Và bây giờ <i>helloGo()</i> function sẽ chạy đồng thời với <i>main()</i> function. <i>Main</i> function sẽ được run trên Goroutine của riêng nó và nó được gọi là <i>main goroutine</i>.
+<p align="justify">
+
+`go helloGo()` start một Goroutine mới. Và bây giờ `helloGo()` function sẽ chạy đồng thời với `main()` function. `Main` function sẽ được run trên Goroutine của riêng nó và nó được gọi là `main goroutine`.
 
 Kết quả:
 </p>
 <p align="center"><img src="../assets/201901_Golang_Goroutines/1.png"/></p>
 <p align="justify">
-Chương trình chỉ in ra <i>main go</i>. Điều gì đã xảy ra khi goroutine được start? Chúng ta cần hiểu được hai tính chất chính sau của goroutine để biết được chính xác điều gì đã xảy ra:
+
+Chương trình chỉ in ra `main go`. Điều gì đã xảy ra khi goroutine được start? Chúng ta cần hiểu được hai tính chất chính sau của goroutine để biết được chính xác điều gì đã xảy ra:
 </p>
 
 * <p align="justify">Khi một Goroutine mới được start, việc call goroutine sẽ return ngay lập tức. Không giống như function, hệ thống không chờ Goroutine được thực thi xong, mà return ngay lập tức dòng code tiếp theo ngay sau dòng code gọi Goroutine và mọi giá trị trả về từ Goroutine sẽ bị bỏ qua.</p>
@@ -57,7 +62,8 @@ Chương trình chỉ in ra <i>main go</i>. Điều gì đã xảy ra khi gorout
 * <p align="justify">Main Goroutine cần được thực thi để các Goroutine khác có thể chạy được. Nếu Main Goroutine chấm dứt thì chương trình cũng chấm dứt và không Goroutine nào được thực thi nữa.</p>
 
 <p align="justify">
-Quay trở lại ví dụ trên, sau khi gọi <i>go helloGo()</i> (line 11), hệ thống trả về ngay lập tức dòng tiếp theo của code mà không đợi <i>helloGo</i> goroutine kết thúc và in ra <i>main go</i>. Sau đó <i>main</i> Goroutine dừng khi không còn đoạn code nào để thực thi và do đó, <i>helloGo</i> goroutine cũng bị chấm dứt.
+
+Quay trở lại ví dụ trên, sau khi gọi `go helloGo()` (line 11), hệ thống trả về ngay lập tức dòng tiếp theo của code mà không đợi `helloGo` goroutine kết thúc và in ra `main go`. Sau đó `main` Goroutine dừng khi không còn đoạn code nào để thực thi và do đó, `helloGo` goroutine cũng bị chấm dứt.
 
 Vậy làm thể nào để in ra kết quả mong muốn? Chúng ta sẽ fix lại đoạn code trên như sau:
 </p>
@@ -84,9 +90,10 @@ Vậy làm thể nào để in ra kết quả mong muốn? Chúng ta sẽ fix l�
 Kết quả:
 <p align="center"><img src="../assets/201901_Golang_Goroutines/2.png"/></p>
 <p align="justify">
-Sử dụng <i>Sleep</i> function của <i>time</i> package để slepp <i>main</i> goroutine đi 1s, dó đó <i>helloGo</i> goroutine có đủ thời gian để thực thi trước khi <i>main</i> goroutine kết thúc và ta có kết quả mong muốn.
 
-Cách sử dụng sleep trong main function để chờ các goroutine khác hoàn thành việc thực thi chỉ là để chúng ta hiểu được Goroutine làm việc như thế nào. Trong thực tế, <i>Channel</i> có thể block <i>main</i> Goroutine cho đến khi tất cả các goroutine khác hoàn thành việc thực thi. Về <i>Channel</i> thì mình sẽ nói trong một bài viết khác.
+Sử dụng `Sleep` function của `time` package để slepp `main` goroutine đi 1s, dó đó `helloGo` goroutine có đủ thời gian để thực thi trước khi `main` goroutine kết thúc và ta có kết quả mong muốn.
+
+Cách sử dụng sleep trong main function để chờ các goroutine khác hoàn thành việc thực thi chỉ là để chúng ta hiểu được Goroutine làm việc như thế nào. Trong thực tế, `Channel` có thể block `main` Goroutine cho đến khi tất cả các goroutine khác hoàn thành việc thực thi. Về `Channel` thì mình sẽ nói trong một bài viết khác.
 </p>
 
 ## 3. Starting multiple Goroutines
@@ -121,13 +128,14 @@ Cách sử dụng sleep trong main function để chờ các goroutine khác ho�
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/oltn5nw0w3)*</sub>
 <p align="justify">
-Chúng ta start <i>numbers</i> goroutine và <i>alphabets</i> (line 21 và 22) goroutine. Hai Goroutine này chạy đồng thời với nhau.
 
-<i>number</i> Goroutine được khởi tạo thời gian sleep là 250 ms và sau đó in ra <i>1</i>, sau đó tiếp tục sleep và in ra <i>2</i>, cứ thế tiếp tục đến khi in ra <i>5</i>. 
+Chúng ta start `numbers` goroutine và `alphabets` (line 21 và 22) goroutine. Hai Goroutine này chạy đồng thời với nhau.
 
-Tương tự, <i>alphabets</i> Goroutine in ra các chữ cái từ <i>a</i> đến <i>e</i> và sleep 400ms. 
+`number` Goroutine được khởi tạo thời gian sleep là 250 ms và sau đó in ra `1`, sau đó tiếp tục sleep và in ra `2`, cứ thế tiếp tục đến khi in ra `5`. 
 
-<i>Main</i> Goroutine start <i>numbers</i> và <i>alphabets</i> Goroutine, được sleep trong 3000 ms và sau đó dừng lại.
+Tương tự, `alphabets` Goroutine in ra các chữ cái từ `a` đến `e` và sleep 400ms. 
+
+`Main` Goroutine start `numbers` và `alphabets` Goroutine, được sleep trong 3000 ms và sau đó dừng lại.
 </p>
 Kết quả:
 <p align="center"><img src="../assets/201901_Golang_Goroutines/3.png"/></p>
@@ -137,13 +145,16 @@ Kết quả:
 </p>
 <p align="center"><img src="../assets/201901_Golang_Goroutines/4.png"/></p>
 <p align="justify">
-Tại phần đầu tiên có màu xanh lam đại diện cho <i>numbers Goroutine</i> , phần thứ hai có màu đỏ đại diện cho <i>alphabets Goroutine</i> , phần thứ ba màu xanh lá cây đại diện cho <i>main Goroutine</i> và phần cuối cùng màu đen hợp nhất tất cả ba phần trên chương trình hoạt động.
 
-Các chuỗi như <i>0 ms</i>, <i>250 ms</i> ở đầu mỗi phần biểu thị thời gian tính bằng mili giây và output được biểu thị ở dưới cùng của mỗi phần là <i>1, 2, 3 , v.v</i>. 
+Tại phần đầu tiên có màu xanh lam đại diện cho `numbers Goroutine` , phần thứ hai có màu đỏ đại diện cho `alphabets Goroutine` , phần thứ ba màu xanh lá cây đại diện cho `main Goroutine` và phần cuối cùng màu đen hợp nhất tất cả ba phần trên chương trình hoạt động.
 
-Phần màu xanh lam cho chúng ta biết rằng <i>1</i> được in sau <i>250 ms</i>, <i>2 được in sau </i>500 ms và cứ thế các số khác tiếp tục được in. 
+Các chuỗi như `0 ms`, `250 ms` ở đầu mỗi phần biểu thị thời gian tính bằng mili giây và output được biểu thị ở dưới cùng của mỗi phần là `1, 2, 3 , v.v`. 
 
-Phần màu đen ở phía dướicó các giá trị <i>1 a 2 3 b 4 c 5 d e main terminated</i> đó chính là output của chương trình.
+Phần màu xanh lam cho chúng ta biết rằng `1` được in sau `250 ms`, `2 được in sau `500 ms và cứ thế các số khác tiếp tục được in. 
+
+Phần màu đen ở phía dướicó các giá trị `1 a 2 3 b 4 c 5 d e main terminated` đó chính là output của chương trình.
 </p>
 <br/>
-<p align="justify">Bài viết về Goroutine của mình đến đây là kết thúc, hẹn gặp lại các bạn trong bài viết tiếp theo về <i>Channel</i> nhé.</p>
+<p align="justify">
+
+Bài viết về Goroutine của mình đến đây là kết thúc, hẹn gặp lại các bạn trong bài viết tiếp theo về `Channel` nhé.</p>

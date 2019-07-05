@@ -11,7 +11,8 @@ Một mảng là một tập hợp các phần tử có cùng kiểu dữ liệu
 ## Declaration
 
 <p align="justify">
-Một mảng được biểu thị kiểu dạng <b>n[T]</b>. Trong đó, <b>n</b> là số lượng phần tử của mảng và <b>T</b> là kiểu dữ liệu của các phần tử trong mảng.
+
+Một mảng được biểu thị kiểu dạng `n[T]`. Trong đó, `n` là số lượng phần tử của mảng và `T` là kiểu dữ liệu của các phần tử trong mảng.
 
 Có rất nhiều cách khác nhau để khai báo và khởi tạo một mảng. Chúng ta cùng xem dưới đây:
 </p>
@@ -31,10 +32,12 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/Zvgh82u0ej)*</sub>
 <p align="justify">
-<b>var a [3]int</b> khai bảo một mảng integer có độ dài 3. Tất cả các phần tử trong một mảng sẽ tự động mang giá trị <b>zero</b> của kiểu dữ liệu mảng. Trong trường hợp này, <b>a</b> là một mảng integer và do đó tất cả các phần tử của <b>a</b> sẽ mang giá trị <b>0</b>, <b>zero</b> value của integer. Chạy chương trình trên chúng ta sẽ thấy console in ra <b>[0, 0, 0]</b>
+
+`var a [3]int` khai bảo một mảng integer có độ dài 3. Tất cả các phần tử trong một mảng sẽ tự động mang giá trị `zero` của kiểu dữ liệu mảng. Trong trường hợp này, `a` là một mảng integer và do đó tất cả các phần tử của `a` sẽ mang giá trị `0`, `zero` value của integer. Chạy chương trình trên chúng ta sẽ thấy console in ra `[0, 0, 0]`
 </p>
 <p align="justify">
-Index của mảng sẽ được bắt đầu từ <b>0</b> và kết thúc tại <b>length - 1</b>. Chúng ta sẽ assgin value cho từng phần tử của mảng ở trên.
+
+Index của mảng sẽ được bắt đầu từ `0` và kết thúc tại `length - 1`. Chúng ta sẽ assgin value cho từng phần tử của mảng ở trên.
 </p>
 
 ```golang
@@ -55,11 +58,12 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/WF0Uj8sv39)*</sub>
 <p align="justify">
-<b>a[0]</b> assign giá trị cho phần tử đầu tiên của mảng. Output của chương trình trên là <b>[12, 78, 50]</b>
+
+`a[0]` assign giá trị cho phần tử đầu tiên của mảng. Output của chương trình trên là `[12, 78, 50]`
 </p>
 
 <p align="justify">
-Chúng ta sẽ tạo một mảng bằng cách sử dụng <b>short hand declaration</b>
+Chúng ta sẽ tạo một mảng bằng cách sử dụng `short hand declaration`
 </p>
 
 ```golang
@@ -76,9 +80,10 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/NKOV04zgI6)*</sub>
 <p align="justify">
-Chương trình trên sẽ có cùng output <b>[12, 78, 50]]</b>
 
-Không nhất thiết tất cả các phần tử trong mảng phải được gán một giá trị khi sử dụng <b>short hand declaration</b>
+Chương trình trên sẽ có cùng output `[12, 78, 50]]`
+
+Không nhất thiết tất cả các phần tử trong mảng phải được gán một giá trị khi sử dụng `short hand declaration`
 </p>
 
 ```golang
@@ -96,9 +101,10 @@ func main() {
 <sub>*[Run program in playground](https://play.golang.org/p/AdPH0kXRly)*</sub>
 
 <p align="justify">
-Trong chương trình trên, <b>a := [3]int{12} </b> khai báo một integer array có độ dài 3 và được cung cấp với duy nhất một giá trị <b>12</b>. Các phần tử còn lại trong mảng sẽ tự động mang <b>zero</b> value. Chương trình có output <b>[12, 0 0].</b>
 
-Bạn thậm chí có thể bỏ qua độ dài của mảng trong khai báo và thay thế nó bằng <b>...</b> và để trình biên dịch tìm độ dài cho bạn. Điều này được thực hiện trong chương trình sau đây.
+Trong chương trình trên, `a := [3]int{12} ` khai báo một integer array có độ dài 3 và được cung cấp với duy nhất một giá trị `12`. Các phần tử còn lại trong mảng sẽ tự động mang `zero` value. Chương trình có output `[12, 0 0].`
+
+Bạn thậm chí có thể bỏ qua độ dài của mảng trong khai báo và thay thế nó bằng `...` và để trình biên dịch tìm độ dài cho bạn. Điều này được thực hiện trong chương trình sau đây.
 </p>
 
 ```golang
@@ -115,7 +121,8 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/_fVmr6KGDh)*</sub>
 <p align="justify">
-Kích thước của mảng là một phần của kiểu mảng. Do đó, <b>[5]int</b> và <b>[25]int</b> là hai kiểu khác nhau. Bới vì điều này nên mảng không thể thay đổi kích thước. 
+
+Kích thước của mảng là một phần của kiểu mảng. Do đó, `[5]int` và `[25]int` là hai kiểu khác nhau. Bới vì điều này nên mảng không thể thay đổi kích thước. 
 </p>
 
 ```golang
@@ -129,7 +136,8 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/kBdot3pXSB)*</sub>
 <p align="justify">
-Trong chương trình trên, chúng ta đang cố assign một biến có kiểu <b>[3]int</b> cho biến mang kiểu <b>[5]int</b> và điều này không được phép nên chạy chương trình trên ta sẽ thấy compiler sẽ throw một error:
+
+Trong chương trình trên, chúng ta đang cố assign một biến có kiểu `[3]int` cho biến mang kiểu `[5]int` và điều này không được phép nên chạy chương trình trên ta sẽ thấy compiler sẽ throw một error:
 </p>
 
 ```
@@ -157,7 +165,8 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/-ncGk1mqPd)*</sub>
 <p align="jusitfy">
-Trong chương trình trên, một bản copy của mảng <b>a</b> được assign cho <b>b</b>. Sau đó, chúng ta thay đổi giá trị của phần tử đầu tiên trong <b>b</b> thành <b>Singapore</b>. Mảng <b>a</b> không bị thay đổi. Output của chương trình sẽ là:
+
+Trong chương trình trên, một bản copy của mảng `a` được assign cho `b`. Sau đó, chúng ta thay đổi giá trị của phần tử đầu tiên trong `b` thành `Singapore`. Mảng `a` không bị thay đổi. Output của chương trình sẽ là:
 </p>
 
 ```
@@ -188,7 +197,8 @@ func main() {
 <sub>*[Run program in playground](https://play.golang.org/p/e3U75Q8eUZ)*</sub>
 
 <p align="justify">
-Trong chương trình trên, mảng <b>num</b> được truyền tới <b>changeLocal</b> function. Mảng <b>num</b> sẽ không có bất kỳ thay đổi nào. 
+
+Trong chương trình trên, mảng `num` được truyền tới `changeLocal` function. Mảng `num` sẽ không có bất kỳ thay đổi nào. 
 </p>
 
 ```
@@ -200,7 +210,8 @@ after passing to function  [5 6 7 8 8]
 ## Length of an array
 
 <p align="justify">
-Chúng ta có thể tìm được độ dài của một mảng bằng cách sử dụng <b>len</b> function
+
+Chúng ta có thể tìm được độ dài của một mảng bằng cách sử dụng `len` function
 </p>
 
 ```golang
@@ -226,7 +237,8 @@ length of a is 4
 ## Iterating arrays using range
 
 <p align="justify">
-Vòng lặp <b>for</b> có thể được sử dụng để duyệt qua tất cả các phần tử của một mảng
+
+Vòng lặp `for` có thể được sử dụng để duyệt qua tất cả các phần tử của một mảng
 </p>
 
 ```golang
@@ -244,7 +256,8 @@ func main() {
 <sub>*[Run program in playground](https://play.golang.org/p/80ejSTACO6)*</sub>
 
 <p align="jusitfy">
-Chương trình trên sử dụng vòng lặp <b>for</b> để duyệt qua tất cả các phần tử của mảng <b>a</b> từ index <b>0</b> cho tới index <b>length of array - 1</b>. Chương trình này sẽ in ra console:
+
+Chương trình trên sử dụng vòng lặp `for` để duyệt qua tất cả các phần tử của mảng `a` từ index `0` cho tới index `length of array - 1`. Chương trình này sẽ in ra console:
 </p>
 
 ```
@@ -255,7 +268,8 @@ Chương trình trên sử dụng vòng lặp <b>for</b> để duyệt qua tất
 ```
 
 <p align="justify">
-Go cung cấp cho chúng ta một cách tốt hơn để duyệt qua các phần tử có trong mảng, bằng cách sử dụng <b>range</b> form của vòng lặp <b>for</b>. <b>range</b> sẽ trả về cả index và giá trị của phần tử tại index đó.
+
+Go cung cấp cho chúng ta một cách tốt hơn để duyệt qua các phần tử có trong mảng, bằng cách sử dụng `range` form của vòng lặp `for`. `range` sẽ trả về cả index và giá trị của phần tử tại index đó.
 </p>
 
 ```golang
@@ -276,7 +290,8 @@ func main() {
 <sub>*[Run program in playground](https://play.golang.org/p/Ji6FRon36m)*</sub>
 
 <p align="justify">
-<b>for i, v := range a</b> ở trên là một <b>range</b> form của vòng lặp <b>for</b>. Nó sẽ trả về index và giá trị tại index đó. Output của chương trình trên là:
+
+`for i, v := range a` ở trên là một `range` form của vòng lặp `for`. Nó sẽ trả về index và giá trị tại index đó. Output của chương trình trên là:
 </p>
 
 ```
@@ -289,7 +304,8 @@ sum of all elements of a 256.5
 ```
 
 <p align="justify">
-Trong một số trường hợp, chúng ta chỉ cần lấy giá trị các phần tử trong mảng mà không quan tâm tới index của chúng, chúng ta có thể thực hiện điều đó bằng cách thay thế index bằng <b>_</b> blank identifier
+
+Trong một số trường hợp, chúng ta chỉ cần lấy giá trị các phần tử trong mảng mà không quan tâm tới index của chúng, chúng ta có thể thực hiện điều đó bằng cách thay thế index bằng `_` blank identifier
 </p>
 
 ``` golang
@@ -344,9 +360,10 @@ func main() {
 <sub>*[Run program in playground](https://play.golang.org/p/InchXI4yY8)*</sub>
 
 <p align="justify">
-Trong chương trình trên, một mảng <b>a</b> hai chiều được khởi tạo với cú pháp short hand declaration. Một mảng hai chiều <b>b</b> cũng được khởi tạo, và từng giá trị string được gán cho từng index. Đây là một cách khác để khởi tạo một mảng hai chiều.
 
-Function <b>printarray</b> sử dụng hai vòng lặp <b>for range</b> để in nội dung của mảng hai chiều. Output của chương trình trên:
+Trong chương trình trên, một mảng `a` hai chiều được khởi tạo với cú pháp short hand declaration. Một mảng hai chiều `b` cũng được khởi tạo, và từng giá trị string được gán cho từng index. Đây là một cách khác để khởi tạo một mảng hai chiều.
+
+Function `printarray` sử dụng hai vòng lặp `for range` để in nội dung của mảng hai chiều. Output của chương trình trên:
 </p>
 
 ```
@@ -360,9 +377,9 @@ AT&T T-Mobile
 ```
 
 <p align="jusitfy">
-Trên đây là những chia sẻ về  Array trong Go. Mặc dù array chưa đủ linh hoạt, hạn chế bởi chúng có độ dài cố định. Không thể tăng chiều dài của một mảng. Trong thực tế <b>Slices</b> sẽ được sử dụng nhiều hơn.
+Trên đây là những chia sẻ về  Array trong Go. Mặc dù array chưa đủ linh hoạt, hạn chế bởi chúng có độ dài cố định. Không thể tăng chiều dài của một mảng. Trong thực tế `Slices` sẽ được sử dụng nhiều hơn.
 
-Vậy <b>Slices</b> là gì, nó có ưu điểm gì so với <b>Array</b>, mình sẽ chia sẻ với các bạn trong bài viết kế tiếp. Hẹn gặp lại.
+Vậy `Slices` là gì, nó có ưu điểm gì so với `Array`, mình sẽ chia sẻ với các bạn trong bài viết kế tiếp. Hẹn gặp lại.
 
 Reference: https://golangbot.com/arrays-and-slices/
 </p>

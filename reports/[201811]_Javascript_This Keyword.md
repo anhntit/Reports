@@ -5,13 +5,13 @@ JavaScript là một trong những ngôn ngữ phổ biến, mạnh mẽ và có
 
 Học Javascript rất dễ, rất nhanh nhưng để thực sự hiểu nó thì không phải là một điều dễ dàng.
 
-<i>this</i> - bạn đã bao giờ nghe tới từ khóa này chưa, nếu chưa thì chắc chắn bạn không phải là một lập trình viên. 
+`this` - bạn đã bao giờ nghe tới từ khóa này chưa, nếu chưa thì chắc chắn bạn không phải là một lập trình viên. 
 
-Chúng ta nên cẩn thận khi sử dụng từ khóa <i>this</i> khi viết code Javascript vì chúng rất dễ gây nhầm lẫn.
+Chúng ta nên cẩn thận khi sử dụng từ khóa `this` khi viết code Javascript vì chúng rất dễ gây nhầm lẫn.
 
-Bài viết này, tôi và các bạn sẽ cùng thảo luận về từ khóa <i>this</i> trong Javascript.
+Bài viết này, tôi và các bạn sẽ cùng thảo luận về từ khóa `this` trong Javascript.
 
-Trong Javascript, khi sử dụng từ khóa <i>this</i> có nghĩa rẳng chúng ta đang tham chiếu tới một Object - đối tượng gọi hàm và thực thi hàm.
+Trong Javascript, khi sử dụng từ khóa `this` có nghĩa rẳng chúng ta đang tham chiếu tới một Object - đối tượng gọi hàm và thực thi hàm.
 
 Nói vậy có vẻ trừu tượng đúng không, chúng ta sẽ cùng xem những ví dụ cơ bản sau đây để có thể hiểu rõ hơn.
 </p>
@@ -52,7 +52,7 @@ Dưới đây là một ví dụ khác:
 18  //undefined's skill: Javascript
 19  candidate.displaySkills();
 ```
-Một ví dụ khác thú vị hơn về việc thay đổi context của <i>this</i>:
+Một ví dụ khác thú vị hơn về việc thay đổi context của `this`:
 
 ```javascript
 1   var fullName = "full name global";
@@ -84,7 +84,8 @@ Hay một ví dụ mà chúng ta bắt gặp rất nhiều và cũng sử dụng
 5   });
 ```
 <p align="justify">
-Ở đây, tuy <i>this</i> được gọi trong anonymous function nhưng Jquery đã gán <i>$(this)</i> cho đối tượng gọi <i>click()</i> function (button element), dó đó <i>$(this)</i> sẽ tham chiếu tới button object.
+
+Ở đây, tuy `this` được gọi trong anonymous function nhưng Jquery đã gán `$(this)` cho đối tượng gọi `click()` function (button element), dó đó `$(this)` sẽ tham chiếu tới button object.
 <br/>
 <br/>
 Trên đây là một số ví dụ về từ khóa this trong Javascript, hy vọng nó sẽ giúp các bạn hiểu hơn về từ khóa này trong Javascript.
