@@ -21,6 +21,7 @@ Liệu kết quả của ví dụ trên có phải là `5`?
 </p>
 
 ## String in Go
+
 <p align="jusitfy">
 `Strings` trong Go khá đặc biệt vì nó được implement khác so với các ngôn ngữ khác.
 
@@ -48,7 +49,6 @@ func main() {
 
 Để tìm độ dài của một chuỗi, chúng ta có thể sử dụng `len` function. `len` function được cung cấp trong Go runtime, vì vậy mà chúng ta không cần phải import chúng.
 </p>
-
 ```golang
 package main
 
