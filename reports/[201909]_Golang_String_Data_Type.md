@@ -49,6 +49,7 @@ func main() {
 
 Để tìm độ dài của một chuỗi, chúng ta có thể sử dụng `len` function. `len` function được cung cấp trong Go runtime, vì vậy mà chúng ta không cần phải import chúng.
 </p>
+
 ```golang
 package main
 
