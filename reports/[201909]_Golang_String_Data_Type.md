@@ -4,6 +4,7 @@
 Xin chào các bạn, một lần mình thực hiện thao tác lấy độ dài của một chuỗi tiếng Nhật trong Go và thấy nó không chính xác so với số ký tự của chuỗi đó. Mình rất thắc mắc tại sao lại như vậy và sau khi tìm hiểu mình đã có câu trả lời.
 
 Hôm nay, chúng ta cùng tìm hiểu về String trong Go nhé.
+</p>
 
 ```golang
 package main
@@ -18,11 +19,11 @@ func main() {
 }
 ```
 Liệu kết quả của ví dụ trên có phải là `5`?
-</p>
+
 
 ## String in Go
 
-<p align="jusitfy">
+<p align="justify">
 `Strings` trong Go khá đặc biệt vì nó được implement khác so với các ngôn ngữ khác.
 
 Strings được định nghĩa giữa hai dấu nháy kép `"..."` chứ không phải dấu nháy đơn, không giống như Javascript. Strings trong Go mặc định được encode `UTF-8`. Vì `UTF-8` hỗ trợ `ASCII character set`, nên chúng ta không cần phải bận tâm về việc encode.
@@ -45,7 +46,7 @@ func main() {
 ```
 <sub>*[Run program in playground](https://play.golang.org/p/vMDoeaV3RCY)*</sub>
 
-<p align="justify>
+<p align="justify">
 
 Để tìm độ dài của một chuỗi, chúng ta có thể sử dụng `len` function. `len` function được cung cấp trong Go runtime, vì vậy mà chúng ta không cần phải import chúng.
 </p>
