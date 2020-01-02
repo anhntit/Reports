@@ -413,6 +413,203 @@ stringCollection
 
 ### Match
 <p align="justify">
+Matching operator có thể được sử dụng để kiểm tra xem predicate có match với stream hay không. Tất cả những operator này là `terminal` và return một boolean
+</p>
+
+```java
+boolean anyStartsWithA =
+    stringCollection
+        .stream()
+        .anyMatch((s) -> s.startsWith("a"));
+
+System.out.println(anyStartsWithA);      // true
+
+boolean allStartsWithA =
+    stringCollection
+        .stream()
+        .allMatch((s) -> s.startsWith("a"));
+
+System.out.println(allStartsWithA);      // false
+
+boolean noneStartsWithZ =
+    stringCollection
+        .stream()
+        .noneMatch((s) -> s.startsWith("z"));
+
+System.out.println(noneStartsWithZ);      // true
+```
+
+### Count
+<p align="justify">
+
+Count là một `terminal` operation trả về số lượng element trong một stream
+</p>
+
+```java
+long startsWithB =
+    stringCollection
+        .stream()
+        .filter((s) -> s.startsWith("b"))
+        .count();
+
+System.out.println(startsWithB);    // 3
+```
+
+### Reduce
+<p align="justify">
+
+Đây là `terminal` operator thực hiện việc giảm trên các element của stream với một function được truyền vào. Kết quả là một `Optional`
+</p>
+
+```java
+Optional<String> reduced =
+    stringCollection
+        .stream()
+        .sorted()
+        .reduce((s1, s2) -> s1 + "#" + s2);
+
+reduced.ifPresent(System.out::println);
+// "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"
+```
+
+## Parallel Streams
+<p align="justify">
+
+Như đã đề cập ở trên, streams có thể là sequential hoặc parallel. Các operator trên sequential stream được thực trên một single thread trong khi các operator trên parallel stream được thực hiện một cách đồng thời trên multiple thread.
+
+Ví dụ sau sẽ cho thấy việc tăng hiệu suất khi sử dụng parallel stream.
+
+Đầu tiên chúng ta sẽ tạo một list có kích thước lớn chứa các phần tử riêng biệt
+</p>
+
+```java
+int max = 1000000;
+List<String> values = new ArrayList<>(max);
+for (int i = 0; i < max; i++) {
+    UUID uuid = UUID.randomUUID();
+    values.add(uuid.toString());
+}
+```
+
+### Sequential Sort
+
+```java
+long t0 = System.nanoTime();
+
+long count = values.stream().sorted().count();
+System.out.println(count);
+
+long t1 = System.nanoTime();
+
+long millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);
+System.out.println(String.format("sequential sort took: %d ms", millis));
+
+// sequential sort took: 899 ms
+```
+
+### Parallel Sort
+
+```java
+
+long t0 = System.nanoTime();
+
+long count = values.parallelStream().sorted().count();
+System.out.println(count);
+
+long t1 = System.nanoTime();
+
+long millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);
+System.out.println(String.format("parallel sort took: %d ms", millis));
+
+// parallel sort took: 472 ms
+```
+
+<p align="justify">
+
+Như bạn có thể thấy hai đoạn code gần như giống hệt nhau nhưng parallel sort nhanh hơn 50%. Đó chính là sự thay đổi khi chúng ta sử dụng `parallelStream()` thay vì `stream()`
+</p>
+
+## Map
+<p align="justify">
+
+Map không hỗ trợ stream. Thay vào đó, map hỗ trợ rất nhiều method hữu ích
+</p>
+
+```java
+Map<Integer, String> map = new HashMap<>();
+
+for (int i = 0; i < 10; i++) {
+    map.putIfAbsent(i, "val" + i);
+}
+
+map.forEach((id, val) -> System.out.println(val));
+```
+
+<p align="justify">
+
+`putIfAbsent` nếu một key đã tồn tại và chúng ta cố gắng put một giá trị gía trị khác cho key đó thì giá trị cũ của key đó vẫn được giữ nguyên. `forEach` chấp nhận một consumer để thực hiện duyệt qua các element của map.
+
+Ví dụ sau sẽ show những function hữu ích khác
+</p>
+
+```java
+
+map.computeIfPresent(3, (num, val) -> val + num);
+map.get(3);             // val33
+
+map.computeIfPresent(9, (num, val) -> null);
+map.containsKey(9);     // false
+
+map.computeIfAbsent(23, num -> "val" + num);
+map.containsKey(23);    // true
+
+map.computeIfAbsent(3, num -> "bam");
+map.get(3);             // val33
+```
+
+<p align="justify">
+
+Tiếp theo chúng ta sẽ xem làm thế nào để có thể remove giá trị cho một key xác định
+</p>
+
+```java
+
+map.remove(3, "val3");
+map.get(3);             // val33
+
+map.remove(3, "val33");
+map.get(3);             // null
+```
+
+<p align="justify">
+
+Một method hữu ích khác
+</p>
+
+```java
+map.getOrDefault(42, "not found");  // not found
+```
+
+<p align="justify">
+
+Việc merge các entry của map cũng khá dễ dàng
+</p>
+
+```java
+map.merge(9, "val9", (value, newValue) -> value.concat(newValue));
+map.get(9);             // val9
+
+map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
+map.get(9);             // val9concat
+```
+
+<p align="justify">
+
+Merge sẽ put key/value vào map nếu không có entry tương ứng tốn tại trong map và nó sẽ thay đổi value đã tồn tại
+</p>
+
+## Date API
+<p align="justify">
 
 
 </p>
