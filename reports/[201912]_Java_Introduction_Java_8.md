@@ -611,5 +611,222 @@ Merge sẽ put key/value vào map nếu không có entry tương ứng tốn t�
 ## Date API
 <p align="justify">
 
+Java 8 có thêm một nhánh các API về date và time nằm trong package `java.time`. Date API mới này không giống với `Joda-Time`. Ví dụ sau sẽ thể hiện những phần quan trọng nhất của API mới này.
+</p>
 
+### Clock
+<p align="justify">
+
+Clock cung cấp truy cập tới date và time hiện tại. Clock nhận biết được timezone và có thể được sử dụng để thay thế cho `System.curentTimeMillis()` để truy xuất milliseconds hiện tại. Thời gian cũng được đại diện bởi một `Instant`. Instant có thể được sử dụng thể tạo ra một `java.util.Date` object.
+</p>
+
+```java
+Clock clock = Clock.systemDefaultZone();
+long millis = clock.millis();
+
+Instant instant = clock.instant();
+Date legacyDate = Date.from(instant);   // legacy java.util.Date
+```
+
+### Timezones
+<p align="justify">
+
+Timezone được đại diện bởi `ZoneId`. Chúng có thể dễ dàng được truy cập thông qua static factory method.
+</p>
+
+```java
+System.out.println(ZoneId.getAvailableZoneIds());
+// prints all available timezone ids
+
+ZoneId zone1 = ZoneId.of("Europe/Berlin");
+ZoneId zone2 = ZoneId.of("Brazil/East");
+System.out.println(zone1.getRules());
+System.out.println(zone2.getRules());
+
+// ZoneRules[currentStandardOffset=+01:00]
+// ZoneRules[currentStandardOffset=-03:00]
+```
+
+### LocalTime
+<p align="jusitfy">
+
+Localtime đại diện cho time mà không có timezone, VD 10pn hoặc 17:30:15. Ví dụ sau tạo hai local time cho những timezone được định nghĩa ở trên. Sau đó chúng ta so sánh cả time đó và tính toán sự khác nhau giữa giờ và phút của hai time đó.
+</p>
+
+```java
+LocalTime now1 = LocalTime.now(zone1);
+LocalTime now2 = LocalTime.now(zone2);
+
+System.out.println(now1.isBefore(now2));  // false
+
+long hoursBetween = ChronoUnit.HOURS.between(now1, now2);
+long minutesBetween = ChronoUnit.MINUTES.between(now1, now2);
+
+System.out.println(hoursBetween);       // -3
+System.out.println(minutesBetween);     // -239
+```
+
+<p align="justify">
+LocalTime đi kèm với những method rất tiện ích để có thể tạo một new instance một cách dễ dàng, bao gồm cả việc parse time string
+</p>
+
+```java
+LocalTime late = LocalTime.of(23, 59, 59);
+System.out.println(late);       // 23:59:59
+
+DateTimeFormatter germanFormatter =
+    DateTimeFormatter
+        .ofLocalizedTime(FormatStyle.SHORT)
+        .withLocale(Locale.GERMAN);
+
+LocalTime leetTime = LocalTime.parse("13:37", germanFormatter);
+System.out.println(leetTime);   // 13:37
+```
+
+### LocalDate
+<p align="justify">
+
+LocalDate đại diện cho một ngày riêng biệt. VD 2014-03-11. Nó là immutable và hoạt động chính xác tương tự như LocalTime. 
+</p>
+
+```java
+LocalDate today = LocalDate.now();
+LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
+LocalDate yesterday = tomorrow.minusDays(2);
+
+LocalDate independenceDay = LocalDate.of(2014, Month.JULY, 4);
+DayOfWeek dayOfWeek = independenceDay.getDayOfWeek();
+System.out.println(dayOfWeek);    // FRIDAY
+```
+
+<p align="justify">
+
+Việc parse một LocalDate từ một string cũng đơn giản như việc parse một LocalTime
+</p>
+
+```java
+DateTimeFormatter germanFormatter =
+    DateTimeFormatter
+        .ofLocalizedDate(FormatStyle.MEDIUM)
+        .withLocale(Locale.GERMAN);
+
+LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
+System.out.println(xmas);   // 2014-12-24
+```
+
+### LocalDateTime
+<p align="justify">
+
+LocalDateTime đại diện cho một date-time. Nó kết hợp giữa date và time. `LocalDateTime` là immutable và nó làm việc tương tự như LocalTime và LocalDate. 
+</p>
+
+```java
+LocalDateTime sylvester = LocalDateTime.of(2014, Month.DECEMBER, 31, 23, 59, 59);
+
+DayOfWeek dayOfWeek = sylvester.getDayOfWeek();
+System.out.println(dayOfWeek);      // WEDNESDAY
+
+Month month = sylvester.getMonth();
+System.out.println(month);          // DECEMBER
+
+long minuteOfDay = sylvester.getLong(ChronoField.MINUTE_OF_DAY);
+System.out.println(minuteOfDay);    // 1439
+```
+
+<p align="justify">
+
+Với thông tin của timezoze nó có thể được convert thành một instant. Instant có thể dễ dàng được convert thành `java.util.Date`
+</p>
+
+```java
+Instant instant = sylvester
+        .atZone(ZoneId.systemDefault())
+        .toInstant();
+
+Date legacyDate = Date.from(instant);
+System.out.println(legacyDate);     // Wed Dec 31 23:59:59 CET 2014
+```
+
+<p align="justify">
+
+Việc format date-time cũng giống như việc format cho date hoặc time.Thay vì sử dụng những format được định nghĩa trước thì chúng ta cũng có thể tạo formatter từ custom patterns
+</p>
+
+```java
+DateTimeFormatter formatter =
+    DateTimeFormatter
+        .ofPattern("MMM dd, yyyy - HH:mm");
+
+LocalDateTime parsed = LocalDateTime.parse("Nov 03, 2014 - 07:13", formatter);
+String string = formatter.format(parsed);
+System.out.println(string);     // Nov 03, 2014 - 07:13
+```
+
+<p align="justify">
+
+Không như `java.text.NumberFormat`, `DateTimeFormatter` là immutable và thred-safe.
+</p>
+
+## Annotations
+<p align="justify">
+
+Annotation trong Java 8 có thể lặp lại. Hãy xem xét ví dụ sau.
+
+Đầu tiên chúng ta sẽ định nghĩa một wrapper annotation nắm giữ một mảng của những annotation thực tế.
+</p>
+
+```java
+@interface Hints {
+    Hint[] value();
+}
+
+@Repeatable(Hints.class)
+@interface Hint {
+    String value();
+}
+```
+
+<p align="justify">
+
+Java 8 cho phép chúng ta sử dụng nhiều annotation có cùng type bằng việc định nghĩa annotation với `@Repeatable`
+</p>
+
+<p>Variant 1: Sử dụng container annotation</p>
+
+```java
+@Hints({@Hint("hint1"), @Hint("hint2")})
+class Person {}
+```
+
+<p>Variant 2: Sử dụng repeatable annotation</p>
+
+```java
+@Hint("hint1")
+@Hint("hint2")
+class Person {}
+```
+
+<p align="justify">
+
+Bằng cách sử dung variant 2 thì java compiler sẽ ngầm định setup `@Hints` annotation phía dưới. 
+</p>
+
+```java
+Hint hint = Person.class.getAnnotation(Hint.class);
+System.out.println(hint);                   // null
+
+Hints hints1 = Person.class.getAnnotation(Hints.class);
+System.out.println(hints1.value().length);  // 2
+
+Hint[] hints2 = Person.class.getAnnotationsByType(Hint.class);
+System.out.println(hints2.length);          // 2
+```
+
+<p align="justify">
+
+Mặc dù chúng ta không bao giờ định nghĩa `@Hints` annotation trên `Person` class, nó vẫn đọc được thông qua `getAnnotation(Hints.class)`. Tuy nhiên, có một method hữu ích hơn là `getAnnotationsByType` sẽ trực tiếp truy cập tới tất cả có chứa `@Hint` annotation.
+</p>
+
+<p align="justify">
+Trên đây là những giới thiệu của mình về Java 8. Hẹn gặp lại các bạn ở những bài viết tiếp theo.
 </p>
